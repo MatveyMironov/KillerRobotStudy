@@ -1,6 +1,5 @@
 using System;
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 namespace LocomotionSystem
@@ -9,16 +8,15 @@ namespace LocomotionSystem
     {
         [SerializeField] private Transform paw;
         [SerializeField] private float speed;
-        [SerializeField] private float distance;
 
         public event Action OnPawMoved;
 
-        public void StartMovingPaw()
+        public void StartMovingPaw(float distance)
         {
-            StartCoroutine(MovingPaw());
+            StartCoroutine(MovingPaw(distance));
         }
 
-        private IEnumerator MovingPaw()
+        private IEnumerator MovingPaw(float distance)
         {
             Vector3 startPosition = paw.position;
             Vector3 targetPosition = startPosition + Vector3.forward * distance;

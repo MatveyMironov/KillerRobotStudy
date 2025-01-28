@@ -9,14 +9,37 @@ namespace LocomotionSystem
         [SerializeField] private PawMover rightBackPawMover;
         [SerializeField] private PawMover leftBackPawMover;
 
+        [Space]
+        [SerializeField] private float distance;
+
         private void Start()
         {
-            rightForwardPawMover.OnPawMoved += leftBackPawMover.StartMovingPaw;
-            leftBackPawMover.OnPawMoved += leftForwardPawMover.StartMovingPaw;
-            leftForwardPawMover.OnPawMoved += rightBackPawMover.StartMovingPaw;
-            rightBackPawMover.OnPawMoved += rightForwardPawMover.StartMovingPaw;
+            rightForwardPawMover.OnPawMoved += MoveLeftBackPaw;
+            leftBackPawMover.OnPawMoved += MoveLeftFrontPaw;
+            leftForwardPawMover.OnPawMoved += MoveRightBackPaw;
+            rightBackPawMover.OnPawMoved += MoveRightFrontPaw;
 
-            rightForwardPawMover.StartMovingPaw();
+            rightForwardPawMover.StartMovingPaw(0.4f);
+        }
+
+        private void MoveRightFrontPaw()
+        {
+            rightForwardPawMover.StartMovingPaw(0.6f);
+        }
+
+        private void MoveLeftFrontPaw()
+        {
+            leftForwardPawMover.StartMovingPaw(0.7f);
+        }
+
+        private void MoveRightBackPaw()
+        {
+            rightBackPawMover.StartMovingPaw(0.6f);
+        }
+
+        private void MoveLeftBackPaw()
+        {
+            leftBackPawMover.StartMovingPaw(0.6f);
         }
     }
 }
